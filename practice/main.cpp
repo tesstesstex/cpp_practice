@@ -7,11 +7,11 @@ void show_value(float f)
 
 int main()
 {
-  int array[5] = {1, 2, 3};
+  int array[10] = {};
 
-  std::cout << "array[0] = " << array[0] << std::endl;
-  std::cout << "array[1] = " << array[1] << std::endl;
-  std::cout << "array[2] = " << array[2] << std::endl;
-  std::cout << "array[3] = " << array[3] << std::endl;
-  std::cout << "array[4] = " << array[4] << std::endl;
+  std::cout << "sizeof(array): " << sizeof(array) << std::endl;
+  // 配列のサイズを要素の方で割ると配列の長さがわかる
+  std::size_t length = sizeof(array) / sizeof(int);
+
+  std::cout << "array[" << length << "]" << std::endl;
 }
