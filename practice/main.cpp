@@ -7,11 +7,12 @@ void show_value(float f)
 
 int main()
 {
-  int array[10] = {};
+  char hello[] = "Hello"; // 文字列リテラルで初期化
 
-  std::cout << "sizeof(array): " << sizeof(array) << std::endl;
-  // 配列の要素を使えば型が変わっていても問題ない
-  std::size_t length = sizeof(array) / sizeof(array[0]);
+  char array[6] = {'a', 'r', 'r'}; // 文字リテラルの配列として初期化
+  array[3] = 'a';
+  array[4] = 'y';
+  array[5] = '\0'; // ヌル文字
 
-  std::cout << "array[" << length << "]" << std::endl;
+  std::cout << hello << ", " << array << std::endl;
 }
