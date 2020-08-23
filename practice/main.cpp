@@ -7,6 +7,11 @@ void show_value(float f)
 
 int main()
 {
-  float i = 42.195f;
-  show_value(i);
+  int array[5] = {1, 2, 3};
+
+  std::cout << "array[0] = " << array[0] << std::endl;
+  std::cout << "array[1] = " << array[1] << std::endl;
+  std::cout << "array[2] = " << array[2] << std::endl;
+  std::cout << "array[3] = " << array[3] << std::endl;
+  std::cout << "array[4] = " << array[4] << std::endl;
 }
