@@ -7,14 +7,17 @@ void show_value(float f)
 
 int main()
 {
-  // 1.7.2 繰り返し for
+  // 1.7.3 繰り返し do
+  // while, for と逆で、実行=>条件式 の順
   int value[] = {-20, 10, 5, -40, 0, 10, -30};
-  for (int i = 0; i < 7; ++i)
+  int i = 0;
+  do
   {
     if (value[i] < 0)
     {
-      std::cout << "continue" << std::endl;
-      continue;
+       std::cout << "continue" << std::endl;
+       ++i;
+       continue;
     }
     if (value[i] == 0)
     {
@@ -22,24 +25,7 @@ int main()
       break;
     }
     std::cout << "elem = " << value[i] << std::endl;
-  }
-  std::cout << "loop finished!" << std::endl;
-
-  // 範囲for
-  int rValue[] = {-20, 10, 5, -40, 0, 10, -30};
-  for (int elem : rValue)
-  {
-    if (elem < 0)
-    {
-      std::cout << "continue" << std::endl;
-      continue;
-    }
-    if (elem == 0)
-    {
-      std::cout << "break" << std::endl;
-      break;
-    }
-    std::cout << "elem = " << elem << std::endl;
-  }
-  std::cout << "loop finished!" << std::endl;
+    ++i;
+  }while(i < 7);
+  std::cout << "loop finished." << std::endl;
 }
