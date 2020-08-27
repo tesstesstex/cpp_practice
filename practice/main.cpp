@@ -10,11 +10,18 @@ struct product
 
 int main()
 {
-  product pen;
+  /* product pen; */
 
-  pen.id = 0;
-  pen.price = 100;
-  pen.stock = 200;
+  /* pen.id = 0; */
+  /* pen.price = 100; */
+  /* pen.stock = 200; */
+
+  product pen =
+  {
+    0,
+    100,
+    200,
+  };
 
   product* ptr = &pen; // 構造体変数へのポインター
 
