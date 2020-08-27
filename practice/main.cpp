@@ -8,14 +8,15 @@ struct product
   int stock;
 };
 
+void show_product(product product)
+{
+  std::cout << "商品ID: " << product.id << std::endl;
+  std::cout << "単価: " << product.price << std::endl;
+  std::cout << "在庫数: " << product.stock << std::endl;
+}
+
 int main()
 {
-  /* product pen; */
-
-  /* pen.id = 0; */
-  /* pen.price = 100; */
-  /* pen.stock = 200; */
-
   product pen =
   {
     0,
@@ -23,9 +24,5 @@ int main()
     200,
   };
 
-  product* ptr = &pen; // 構造体変数へのポインター
-
-  std::cout << "商品ID: " << ptr->id << std::endl;
-  std::cout << "単価: " << ptr->price << std::endl;
-  std::cout << "在庫数: " << ptr->stock << std::endl;
+  show_product(pen);
 }
