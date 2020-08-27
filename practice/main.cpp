@@ -1,31 +1,24 @@
 #include <iostream>
 
-void show_value(float f)
+// 2.1.1 構造体 struct
+struct product
 {
-  std::cout << f << std::endl;
-}
+  int id;
+  int price;
+  int stock;
+};
 
 int main()
 {
-  // 1.7.3 繰り返し do
-  // while, for と逆で、実行=>条件式 の順
-  int value[] = {-20, 10, 5, -40, 0, 10, -30};
-  int i = 0;
-  do
-  {
-    if (value[i] < 0)
-    {
-       std::cout << "continue" << std::endl;
-       ++i;
-       continue;
-    }
-    if (value[i] == 0)
-    {
-      std::cout << "break" << std::endl;
-      break;
-    }
-    std::cout << "elem = " << value[i] << std::endl;
-    ++i;
-  }while(i < 7);
-  std::cout << "loop finished." << std::endl;
+  product pen;
+
+  pen.id = 0;
+  pen.price = 100;
+  pen.stock = 200;
+
+  product* ptr = &pen; // 構造体変数へのポインター
+
+  std::cout << "商品ID: " << ptr->id << std::endl;
+  std::cout << "単価: " << ptr->price << std::endl;
+  std::cout << "在庫数: " << ptr->stock << std::endl;
 }
