@@ -1,19 +1,72 @@
+// chapter 2.2 class
 #include <iostream>
 
-// 列挙体
-enum class Category
+class product
 {
-  Value1, // 0
-  Value2, // 1
-  Value3 = 100,
-  Value4, // 101
+  int id;
+  int price;
+  int stock;
+
+  public:
+    int get_id();
+    void set_id(int new_id);
+    int get_price();
+    void set_price(int new_price);
+    int get_stock();
+    void set_stock(int new_stock);
 };
+
+int product::get_id()
+{
+  return id;
+}
+
+void product::set_id(int new_id)
+{
+  id = new_id;
+}
+
+int product::get_price()
+{
+  return price;
+}
+
+void product::set_price(int new_price)
+{
+  if (new_price < 0)
+  {
+    std::cout << "error: You must set price over 0." << std::endl;
+    return;
+  }
+  price = new_price;
+}
+
+int product::get_stock()
+{
+  return stock;
+}
+
+void product::set_stock(int new_stock)
+{
+  if (new_stock < 0)
+  {
+    std::cout << "error: You must set stock over 0." << std::endl;
+    return;
+  }
+  stock = new_stock;
+}
 
 int main()
 {
-  // 列挙体の変数を宣言してValue3で初期化
-  // 列挙体名と列挙値をスコープ解決演算子::でつなげるとその値を使うことができる
-  Category cat = Category::Value3;
+  product pen;
 
-  std::cout << static_cast<int>(cat) << std::endl;
+  pen.set_id(0);
+  pen.set_price(100);
+  pen.set_stock(200);
+
+  // pointer for an instance
+  product* ptr = &pen;
+  std::cout << "id: " << ptr->get_id() << std::endl;
+  std::cout << "price: " << ptr->get_price() << std::endl;
+  std::cout << "stock: " << ptr->get_stock() << std::endl;
 }
