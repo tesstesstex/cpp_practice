@@ -1,72 +1,19 @@
-// chapter 2.2 class
+// 2.3 参照
+// 2.3.1 変数の別名
+
 #include <iostream>
-
-class product
-{
-  int id;
-  int price;
-  int stock;
-
-  public:
-    int get_id();
-    void set_id(int new_id);
-    int get_price();
-    void set_price(int new_price);
-    int get_stock();
-    void set_stock(int new_stock);
-};
-
-int product::get_id()
-{
-  return id;
-}
-
-void product::set_id(int new_id)
-{
-  id = new_id;
-}
-
-int product::get_price()
-{
-  return price;
-}
-
-void product::set_price(int new_price)
-{
-  if (new_price < 0)
-  {
-    std::cout << "error: You must set price over 0." << std::endl;
-    return;
-  }
-  price = new_price;
-}
-
-int product::get_stock()
-{
-  return stock;
-}
-
-void product::set_stock(int new_stock)
-{
-  if (new_stock < 0)
-  {
-    std::cout << "error: You must set stock over 0." << std::endl;
-    return;
-  }
-  stock = new_stock;
-}
 
 int main()
 {
-  product pen;
+  int value = 42;
 
-  pen.set_id(0);
-  pen.set_price(100);
-  pen.set_stock(200);
+  std::cout << "valuable value's address is " << &value << " and its value is " << value << "." << std::endl;
 
-  // pointer for an instance
-  product* ptr = &pen;
-  std::cout << "id: " << ptr->get_id() << std::endl;
-  std::cout << "price: " << ptr->get_price() << std::endl;
-  std::cout << "stock: " << ptr->get_stock() << std::endl;
+  int& reference = value;
+
+  std::cout << "valuable reference's address is " << &reference << " and its value is " << reference << "." << std::endl;
+
+  reference = 0;
+
+  std::cout << "valuable value's address is " << &value << " and its value is " << value << "." << std::endl;
 }
