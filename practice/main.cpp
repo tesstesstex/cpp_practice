@@ -1,19 +1,13 @@
-// 2.4 型推論
-// 2.4.3 式の型を推論する
+// 2.5 型の別名定義
+// 2.5.1 型に別の名前を与える
 
 #include <iostream>
 
-// 値1 の型を推論し、その方を戻り値の型として使う
-decltype(1) one()
+using integer = int;
+integer main()
 {
-  return 1;
-}
-
-int main()
-{
-  auto i = one();
-  decltype(i) j;
-
-  j = 42.195;
-  std::cout << j << std::endl;
+  int value = 42;
+  using number = integer;
+  number num = 0;
+  value = num;
 }
