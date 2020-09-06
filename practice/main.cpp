@@ -1,30 +1,46 @@
 // 2.7 関数オーバーロード
-// 2.7.1 引数の数が違うオーバーロード
+// 2.7.2 型が違うオーバーロード
 
 #include <iostream>
 
-void show_value(int a)
+// 2 次元ベクトルを表す構造体
+struct vector2d
 {
-  std::cout << a << std::endl;
+  int x;
+  int y;
+};
+
+// 整数用のオーバーロード
+int add(int left, int right)
+{
+  return left + right;
 }
 
-int sum(int a, int b)
+// 浮動小数点用のオーバーロード
+double add(double left, double right)
 {
-  int c = a + b;
-  return c;
+  return left + right;
 }
 
-int sum(int a, int b, int c)
+// 2 次元ベクトル用のオーバーロード
+vector2d add(vector2d left, vector2d right)
 {
-  int d = a + b + c;
-  return d;
+  vector2d v;
+  v.x = left.x + right.x;
+  v.y = left.y + right.y;
+  return v;
 }
 
 int main()
 {
-  int x = sum(10, 20);
-  show_value(x);
+  int integer = add(1, 2);
+  std::cout << integer << std::endl;
 
-  int y = sum(10, 20, 30);
-  show_value(y);
+  double floating = add(3.14, 42.195);
+  std::cout << floating << std::endl;
+
+  vector2d v = {1, 2};
+  vector2d u = {-3, 4};
+  vector2d w = add(v, u);
+  std::cout << w.x << ", " << w.y << std::endl;
 }
