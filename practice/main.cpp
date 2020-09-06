@@ -1,17 +1,30 @@
-// 2.6 コンソールからの入力
-// 2.6.2 文字列の入力
+// 2.7 関数オーバーロード
+// 2.7.1 引数の数が違うオーバーロード
+
 #include <iostream>
-#include <string>
+
+void show_value(int a)
+{
+  std::cout << a << std::endl;
+}
+
+int sum(int a, int b)
+{
+  int c = a + b;
+  return c;
+}
+
+int sum(int a, int b, int c)
+{
+  int d = a + b + c;
+  return d;
+}
 
 int main()
 {
-  /* std::string s; */
-  /* std::cout << "文字列を入力しなさい！> "; */
-  /* std::cin >> s; */
-  /* std::cout << "入力された文字列は\"" << s << "\"です" << std::endl; */
+  int x = sum(10, 20);
+  show_value(x);
 
-  std::string sl;
-  std::cout << "文字列を入力しなさい！> ";
-  std::getline(std::cin, sl); // 1行全体の文字列入力を受け取る
-  std::cout << "入力された文字列は\"" << sl << "\"です" << std::endl;
+  int y = sum(10, 20, 30);
+  show_value(y);
 }
