@@ -1,59 +1,57 @@
 // 3 クラス
-// 3.1 const メンバー関数とmutable
-// 3.1.2 const/非const メンバー関数間のオーバーロード
+// 3.2 コンストラクターとデストラクタ〜
+// 3.2.3 コンストラクターと他の関数との違い
 
 #include <iostream>
+#include <string>
 
-class heavy_class
+class person
 {
-  int m_value;
-
-  mutable int m_cache;
-  mutable bool m_cache_valid;
+  std::string m_name;
+  int         m_age;
 
   public:
-    int generate() const;
-    void set(int value);
-    int get() const;
+    person();
+
+    void set_name(std::string name);
+    void set_age(int age);
+
+    std::string name() const;
+    int age() const;
 };
 
-int heavy_class::generate() const
+person::person() : m_age(-1)
 {
-  std::cout << "function to create very heavy data" << std::endl;
-  return m_value;
+  std::cout << "calling constructor" << std::endl;
 }
 
-void heavy_class::set(int value)
+void person::set_name(std::string name)
 {
-  // 本来はセットされたタイミングで最終的に使うデータを生成できるとよいが、
-  // 処理が重い場合には必要になるまで生成しないこともある
-  m_cache_valid = false; // キャッシュを無効化
-  m_value = value;
+  m_name = name;
 }
 
-int heavy_class::get() const
+void person::set_age(int age)
 {
-  // キャッシュが有効ならそれを返す
-  if(m_cache_valid) { return m_cache; }
+  m_age = age;
+}
 
-  // 本来はconst メンバー関数はメンバー変数を変更できないが
-  // mutable なメンバー変数は変更できる
-  m_cache = generate(); // データを生成してキャッシュに保存
-  m_cache_valid = true; // キャッシュを有効化
+std::string person::name() const
+{
+  return m_name;
+}
 
-  return m_cache;
+int person::age() const
+{
+  return m_age;
 }
 
 int main()
 {
-  heavy_class heavy_object;
-  heavy_object.set(100);
-  std::cout << heavy_object.get() << std::endl;
-  // データ生成関数は呼ばれずにキャッシュが返される
-  std::cout << heavy_object.get() << std::endl;
+  person bob;
 
-  heavy_object.set(200);
-  std::cout << heavy_object.get() << std::endl;
-  // データ生成関数は呼ばれずにキャッシュが返される
-  std::cout << heavy_object.get() << std::endl;
+  std::cout << "初期化直後の年齢: " << bob.age() <<std::endl;
+  bob.set_name("bob");
+  bob.set_age(20);
+  std::cout << "名前: " << bob.name() << std::endl;
+  std::cout << "年齢: " << bob.age() << std::endl;
 }
