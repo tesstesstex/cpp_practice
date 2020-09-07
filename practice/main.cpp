@@ -1,29 +1,33 @@
 // 3 クラス
 // 3.1 const メンバー関数とmutable
-// 3.1.1 メンバー変数を変更する/しない関数
+// 3.1.2 const/非const メンバー関数間のオーバーロード
 
 #include <iostream>
 
 class product
 {
   int id;
+
   public:
+    int get_id();
     int get_id() const;
-    void set_id(int new_id);
 };
+
+int product::get_id()
+{
+  std::cout << "not const" << std::endl;
+}
 
 int product::get_id() const
 {
-  return id;
-}
-
-void product::set_id(int new_id)
-{
-  id = new_id;
+  std::cout << "const" << std::endl;
 }
 
 int main()
 {
+  product p;
+  p.get_id();
+
   const product cp{};
-  std::cout << cp.get_id() << std::endl;
+  cp.get_id();
 }
