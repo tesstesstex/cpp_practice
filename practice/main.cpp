@@ -1,5 +1,5 @@
 // 2.8 ラムダ式
-// 2.8.4 変更可能なコピーキャプチャ
+// 2.8.5 参照を取得するキャプチャ
 
 #include <iostream>
 
@@ -7,12 +7,15 @@ int main()
 {
   int a = 0;
 
-  auto lambda = [a]() mutable
+  auto lambda = [&a]()
   {
-    a = 42;
     std::cout << a << std::endl;
+    ++a;
   };
 
   lambda();
+  // original
   std::cout << a << std::endl;
+  a = 42;
+  lambda();
 }
