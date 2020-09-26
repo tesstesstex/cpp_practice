@@ -1,6 +1,6 @@
 // 3 クラス
 // 3.2 コンストラクターとデストラクタ〜
-// 3.2.3 コンストラクターと他の関数との違い
+// 3.2.4 デストラクター
 
 #include <iostream>
 #include <string>
@@ -8,21 +8,27 @@
 class person
 {
   std::string m_name;
-  int         m_age;
+  int          m_age;
 
   public:
     person();
+    ~person();
 
     void set_name(std::string name);
     void set_age(int age);
 
     std::string name() const;
-    int age() const;
+    int         age() const;
 };
 
 person::person() : m_age(-1)
 {
-  std::cout << "calling constructor" << std::endl;
+  std::cout << "コンストラクター呼び出し" << std::endl;
+}
+
+person::~person()
+{
+  std::cout << "デストラクター呼び出し" << std::endl;
 }
 
 void person::set_name(std::string name)
@@ -48,10 +54,9 @@ int person::age() const
 int main()
 {
   person bob;
-
-  std::cout << "初期化直後の年齢: " << bob.age() <<std::endl;
   bob.set_name("bob");
   bob.set_age(20);
-  std::cout << "名前: " << bob.name() << std::endl;
-  std::cout << "年齢: " << bob.age() << std::endl;
+  std::cout << "main() 関数の最後" << std::endl;
+
+  // bob はもう使われないのでデストラクターが呼ばれる
 }
