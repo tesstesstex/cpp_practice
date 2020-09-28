@@ -1,81 +1,38 @@
 // 3 クラス
 // 3.3 初期値を受け取るコンストラクター
-// 3.3.3 コピーコンストラクター
+// 3.3.4 = を使った初期化
 
 #include <iostream>
 #include <string>
 
-class person
+class A
 {
-  std::string m_name;
-  int         m_age;
-
-  person(int age);
+  int m_v;
 
   public:
-    person();
-    person(std::string name, int age);
-
-    person(const person& other); // コピーコンストラクター
-
-    void set_name(std::string name);
-    void set_age(int age);
-
-    std::string name() const;
-    int         age() const;
+    A(int);
+    int v() const;
 };
 
-person::person(int age) : m_age(age)
+A::A(int v) : m_v(v)
 {
-  std::cout << "共通コンストラクター呼び出し" << std::endl;
+
 }
 
-person::person() : person(-1)
+int A::v() const
 {
-  std::cout << "引数なしコンストラクター呼び出し" << std::endl;
-}
-
-person::person(std::string name, int age) : person(age)
-{
-  std::cout << "引数付きコンストラクター呼び出し" << std::endl;
-  set_name(name);
-}
-
-// コピーコンストラクター
-person::person(const person& other)
-{
-  std::cout << "コピーコンストラクター呼び出し" << std::endl;
-  // 名前をコピーする
-  set_name(other.name());
-  set_age(other.age());
-}
-
-void person::set_name(std::string name)
-{
-  m_name = name;
-}
-
-void person::set_age(int age)
-{
-  m_age = age;
-}
-
-std::string person::name() const
-{
-  return m_name;
-}
-
-int person::age() const
-{
-  return m_age;
+  return m_v;
 }
 
 int main()
 {
-  person alice("alice", 15);
-
-  person copy(alice); // コピーコンストラクター
-
-  std::cout << copy.name() << std::endl;
-  std::cout << alice.name() << std::endl;
+  A x = 42; // A::A(int) を呼び出している
+  if (x.v() == 42)
+  {
+    std::cout << "A.v() は42 です" << std::endl;
+  }
+  else
+  {
+    std::cout << "A.v() は42 ではない" << std::endl;
+  }
 }
