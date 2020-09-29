@@ -1,45 +1,40 @@
 // 3 クラス
-// 3.4 デフォルトの初期値
-// 3.4.2 メンバー初期化リストと初期値
+// 3.5 継承の概要
+// 3.5.2 仮想関数とオーバーライド
 
 #include <iostream>
-#include <string>
 
-class Book
+class Base // 基底となるクラス
 {
-  std::string title = "";
-  int         page = 0;
-
   public:
-    Book();
-    explicit Book(std::string title, int page);
-
-    void show() const;
+    void foo();
 };
 
-// page はメンバー初期化リストで省略したのでNSDMI のデフォルト値を使って初期化される
-Book::Book() : title("untitled")
+void Base::foo()
 {
-
+  std::cout << "foo()" << std::endl;
 }
 
-// メンバー初期化リストで与えた初期値が使われる
-Book::Book(std::string title, int page) : title(title), page(page)
+class Derived : public Base // Base のメンバーを継承する
+                            // public はBase のメンバー関数をpublic のまま継承するという意味
 {
+  public:
+    void bar();
+};
 
-}
-
-void Book::show() const
+void Derived::bar()
 {
-  std::cout << title << " " << page << "ページ" << std::endl;
+  std::cout << "bar()" << std::endl;
 }
 
 int main()
 {
-  Book nsdmi;
+  Base base;
+  base.foo(); // 基底クラスのfoo が呼ばれる
 
-  nsdmi.show();
-  Book old_edition{"独習C++ 第4版", 568};
+  // base.bar(); // エラー。基底クラスには派生クラスで追加したメンバーは存在していない。
 
-  old_edition.show();
+  Derived derived;
+  derived.foo(); // 基底クラスのfoo が呼ばれる
+  derived.bar(); // 派生クラスで追加したbar が呼ばれる
 }
