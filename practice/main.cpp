@@ -7,7 +7,7 @@
 class Base // 基底となるクラス
 {
   public:
-    void foo();
+    virtual void foo();
 };
 
 void Base::foo()
@@ -19,22 +19,23 @@ class Derived : public Base // Base のメンバーを継承する
                             // public はBase のメンバー関数をpublic のまま継承するという意味
 {
   public:
-    void bar();
+    void foo() override; // 派生クラスでメンバー関数をオーバーライド
+    void foo(int i);
 };
 
-void Derived::bar()
+void Derived::foo()
 {
-  std::cout << "bar()" << std::endl;
+  std::cout << "Derived::foo() override" << std::endl;
+}
+
+void Derived::foo(int i)
+{
+  std::cout << "Derived::foo(" << i << ")" << std::endl;
 }
 
 int main()
 {
-  Base base;
-  base.foo(); // 基底クラスのfoo が呼ばれる
-
-  // base.bar(); // エラー。基底クラスには派生クラスで追加したメンバーは存在していない。
-
   Derived derived;
-  derived.foo(); // 基底クラスのfoo が呼ばれる
-  derived.bar(); // 派生クラスで追加したbar が呼ばれる
+  derived.foo(); // 仮想関数呼び出し
+  derived.foo(42); // 仮想関数ではないオーバーロードの呼び出し
 }
