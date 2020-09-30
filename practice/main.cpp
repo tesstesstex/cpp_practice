@@ -1,10 +1,10 @@
 // 3 クラス
 // 3.5 継承の概要
-// 3.5.2 仮想関数とオーバーライド
+// 3.5.3 名前の隠蔽
 
 #include <iostream>
 
-class Base // 基底となるクラス
+class Base
 {
   public:
     virtual void foo();
@@ -12,23 +12,17 @@ class Base // 基底となるクラス
 
 void Base::foo()
 {
-  std::cout << "foo()" << std::endl;
+  std::cout << "Base::foo()" << std::endl;
 }
 
-class Derived : public Base // Base のメンバーを継承する
-                            // public はBase のメンバー関数をpublic のまま継承するという意味
+class Derived : public Base
 {
   public:
-    void foo() override; // 派生クラスでメンバー関数をオーバーライド
-    void foo(int i);
+    using Base::foo; // 基底クラスのfoo()を呼び出せるようにする
+    void foo(int v); // 派生クラスで追加したオーバーロード
 };
 
-void Derived::foo()
-{
-  std::cout << "Derived::foo() override" << std::endl;
-}
-
-void Derived::foo(int i)
+void Derived::foo(int i) // v に揃えなくてもOK
 {
   std::cout << "Derived::foo(" << i << ")" << std::endl;
 }
@@ -36,6 +30,6 @@ void Derived::foo(int i)
 int main()
 {
   Derived derived;
-  derived.foo(); // 仮想関数呼び出し
-  derived.foo(42); // 仮想関数ではないオーバーロードの呼び出し
+  derived.foo(); // 基底クラスのfoo()が呼ばれる
+  derived.foo(42); // 派生クラスで追加したオーバーロードの呼び出し
 }
